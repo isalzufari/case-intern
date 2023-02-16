@@ -9,6 +9,7 @@ var logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const refreshTokenRouter = require('./routes/refreshToken');
+const adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/users/admin', adminRouter);
 app.use('/refresh-tokens', refreshTokenRouter);
 
 // catch 404 and forward to error handler

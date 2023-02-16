@@ -18,6 +18,14 @@ module.exports = {
         type: Sequelize.BIGINT,
         allowNull: false
       },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
     });
 
     await queryInterface.addConstraint('user_courses', {

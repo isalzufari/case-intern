@@ -11,6 +11,9 @@ const usersRouter = require('./routes/users');
 const refreshTokenRouter = require('./routes/refreshToken');
 const adminRouter = require('./routes/admin');
 
+const coursesRouter = require('./routes/courses');
+const coursesCategoriesRouter = require('./routes/courseCategories');
+
 var app = express();
 
 // view engine setup
@@ -27,6 +30,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/users/admin', adminRouter);
 app.use('/refresh-tokens', refreshTokenRouter);
+app.use('/course', coursesRouter);
+app.use('/course_categories', coursesCategoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

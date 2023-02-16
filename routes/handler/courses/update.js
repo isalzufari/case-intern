@@ -1,13 +1,15 @@
-const { CourseCategories } = require('../../../models');
+const { Courses } = require('../../../models');
 const Validator = require('fastest-validator');
 const v = new Validator();
 
 module.exports = async (req, res) => {
   const schema = {
-    name: 'string|empty:false',
-  }
+    title: 'string|empty:false',
+    course_category_id: 'number|empty:false'
+  };
 
   const validate = v.validate(req.body, schema);
+
   if (validate.length) {
     return res.status(400).json({
       status: 'error',
@@ -16,23 +18,25 @@ module.exports = async (req, res) => {
   }
 
   const id = req.params.id;
-  const courseCategories = await CourseCategories.findByPk(id);
-  if (!courseCategories) {
+  const course = await Courses.findByPk(id);
+  if (!course) {
     return res.status(404).json({
       status: 'error',
-      message: 'categories not found'
+      message: 'courses not found'
     });
   }
 
-  await courseCategories.update({
-    name: req.body.name
+  await course.update({
+    title: req.body.title,
+    course_category_id: req.body.course_category_id
   });
 
   return res.json({
     status: 'success',
     data: {
-      id: courseCategories.id,
-      name: req.body.name
+      id: course.id,
+      title: course.title,
+      course_category_id: course.course_category_id
     }
   })
 }

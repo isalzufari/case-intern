@@ -9,6 +9,16 @@ module.exports = (sequalize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    createdAt: {
+      field: 'created_at',
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: DataTypes.DATE,
+      allowNull: false
     }
   }, {
     tableName: 'course_categories',

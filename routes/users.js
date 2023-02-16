@@ -8,5 +8,8 @@ const verifyToken = require('../middlewares/verifyToken');
 router.post('/login', usersHandler.login);
 router.post('/logout', verifyToken, usersHandler.logout);
 router.post('/register', usersHandler.register);
+router.get('/', usersHandler.getAll);
+router.put('/:id', usersHandler.updated);
+router.delete('/:id', usersHandler.deleted);
 
 module.exports = router;

@@ -38,5 +38,5 @@ module.exports = async (req, res) => {
       title: course.title,
       course_category_id: course.course_category_id
     }
-  })
+  });
 }

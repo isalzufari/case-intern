@@ -13,6 +13,16 @@ module.exports = (sequalize, DataTypes) => {
     course_id: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    createdAt: {
+      field: 'created_at',
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: DataTypes.DATE,
+      allowNull: false
     }
   }, {
     tableName: 'user_courses',

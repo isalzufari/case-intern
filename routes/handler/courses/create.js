@@ -28,8 +28,6 @@ module.exports = async (req, res) => {
     });
   }
 
-  // res.send(req.body);
-
   const data = {
     title: req.body.title,
     course_category_id: req.body.course_category_id

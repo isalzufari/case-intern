@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
-const { User } = require("../../../models");
-const Validator = require("fastest-validator");
+const bcrypt = require('bcrypt');
+const { User } = require('../../../models');
+const Validator = require('fastest-validator');
 const v = new Validator();
 
 module.exports = async (req, res) => {
@@ -19,31 +19,33 @@ module.exports = async (req, res) => {
     });
   }
 
-  const user = await User.findOne({
-    where: { email: req.body.email }
-  });
-
-  if (user) {
-    return res.status(409).json({
+  const id = req.params.id;
+  const user = await User.findByPk(id);
+  if (!user) {
+    return res.status(404).json({
       status: 'error',
-      message: 'email already exist'
+      message: 'user not found'
     });
   }
 
   const password = await bcrypt.hash(req.body.password, 10);
+  const {
+    name,
+    email
+  } = req.body;
 
-  const data = {
-    password,
-    name: req.body.name,
-    email: req.body.email,
-  }
-
-  const createdUser = await User.create(data);
+  await user.update({
+    name,
+    email,
+    password
+  });
 
   return res.json({
     status: 'success',
     data: {
-      id: createdUser.id
+      id: user.id,
+      name,
+      email
     }
   });
 }

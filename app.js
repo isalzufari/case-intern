@@ -9,6 +9,13 @@ var logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const refreshTokenRouter = require('./routes/refreshToken');
+const adminRouter = require('./routes/admin');
+
+const coursesRouter = require('./routes/courses');
+const coursesCategoriesRouter = require('./routes/courseCategories');
+const usersCoursesRouter = require('./routes/userCourses');
+
+const verifyToken = require('./middlewares/verifyToken');
 
 var app = express();
 
@@ -24,7 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/users/admin', adminRouter);
 app.use('/refresh-tokens', refreshTokenRouter);
+app.use('/course', verifyToken, coursesRouter);
+app.use('/course_categories', verifyToken, coursesCategoriesRouter);
+app.use('/user_course', verifyToken, usersCoursesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

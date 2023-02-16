@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const { User } = require("../../../models");
+const { Admin } = require("../../../models");
 const Validator = require("fastest-validator");
 const v = new Validator();
 
@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     name: 'string|empty:false',
     email: 'email|empty:false',
     password: 'string|min:6'
-  }
+  };
 
   const validate = v.validate(req.body, schema);
 
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  const user = await User.findOne({
+  const user = await Admin.findOne({
     where: { email: req.body.email }
   });
 
@@ -38,7 +38,9 @@ module.exports = async (req, res) => {
     email: req.body.email,
   }
 
-  const createdUser = await User.create(data);
+  // res.send(data)
+
+  const createdUser = await Admin.create(data);
 
   return res.json({
     status: 'success',

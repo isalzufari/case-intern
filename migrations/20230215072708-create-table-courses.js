@@ -17,6 +17,14 @@ module.exports = {
       course_category_id: {
         type: Sequelize.BIGINT,
         allowNull: false
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
 
